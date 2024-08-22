@@ -30,6 +30,7 @@ const Navigation = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        // animation: 'slide_from_right',
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <Stack.Screen

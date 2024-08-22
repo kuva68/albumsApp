@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
 
 import {Text} from '../../../components/Text';
 import {scaledSize, scaledY} from '../../../utils/scaleSize';
@@ -14,7 +14,12 @@ type Props = {
 
 export const TrackItem = (props: Props) => {
   const {item, index} = props;
-
+  const duration = useMemo(() => {
+    if (!item?.duration) {
+      return '';
+    }
+    return `${Math.floor(item?.duration / 60)}m ${item?.duration % 60}s`;
+  }, [item?.duration]);
   return (
     <View style={[styles.container]}>
       <GradientIcon index={index} secret={item?.name} />
@@ -23,7 +28,7 @@ export const TrackItem = (props: Props) => {
         <Text numberOfLines={1} preset="accentTitle" style={styles.title}>
           {`${item?.name}`}
         </Text>
-        <Text preset="accentLight">{`Duration: ${item?.duration} s`}</Text>
+        <Text preset="accentLight">{`Duration: ${duration}`}</Text>
       </View>
     </View>
   );
